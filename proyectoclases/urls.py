@@ -19,8 +19,10 @@ from . import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('hola/',views.hola),
-    path('calculadora',views.calculadora),
-    path('fecha',views.fecha),
+    path('calculadora/',views.calculadora),
+    path('fecha/',views.fecha),
     path('fecha-nacimiento/<int:edad>',views.nacimiento),
-    path('mi-template',views.mi_template),
+    path('mitemplate/',views.mi_template),
+    path('tutemplate/<str:nombre>',views.tu_template),
+    path('pruebatemplate/',views.pruebatemplate),
 ]

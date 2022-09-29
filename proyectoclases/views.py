@@ -1,10 +1,10 @@
 from urllib import request
 from django.http import HttpResponse
 from datetime import datetime
-from django.template import Context,Template
+from django.template import Context,Template,loader
 
 def hola(request):
-    return HttpResponse('Hola mundo web')
+    return HttpResponse('<h1>hola mundo</h1>')
 
 def calculadora(request):
     num1 = int(input('numero 1: ' ))
@@ -17,7 +17,7 @@ def fecha(request):
 
 def nacimiento(request,edad):
     fecha = datetime.now().year - edad 
-    return HttpResponse(f'Tu fecha de nacimiento para tu {edad} es {fecha}')
+    return HttpResponse(f'Tu fecha de nacimiento para tu {edad} es {fecha}') #HttpResponse muestra lo que se va a ver
 
 def mi_template(request):
 
@@ -29,5 +29,22 @@ def mi_template(request):
     contexto = Context()
 
     template_renderizado= template.render(contexto)
+
+    return HttpResponse(template_renderizado)
+
+def tu_template(request,nombre):
+
+    template = loader.get_template('tutemplate.html')
+
+    template_renderizado = template.render({'persona': nombre})
+
+    return HttpResponse(template_renderizado)
+
+
+def pruebatemplate(request):
+    micontexto = {'rango':(1,11)}
+    template = loader.get_template('pruebatempalte.html')
+
+    template_renderizado = template.render({micontexto})
 
     return HttpResponse(template_renderizado)
